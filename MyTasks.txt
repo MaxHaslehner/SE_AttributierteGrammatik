@@ -1,0 +1,82 @@
+{
+    (
+        Description:Keycloak aufsetzen;
+        Date: 30.12.2024;
+        Hours-estimated: 5;
+        Lead: Mia Kaiser;
+        Contributors: Peter Mayr, David Lonin;
+        Subtasks: Docker installieren, Datenbankcontainer erstellen, Keycloakcontainer erstellen;
+    ),
+    (
+        Description: Ressourcenplanung KW1;
+        Date: 19.12.2024;
+        Hours-estimated: 11;
+        Lead: Julia Bernert;
+        Contributors: Mia Kaiser;
+        Subtasks: Ressourcenbedarf einzelner Projekte ermitteln;
+    ),
+    (
+        Description: Gym gehen;
+        Date: 19.12.2024;
+        Hours-estimated: 11;
+        Lead: Max Haslehner;
+        Contributors: Adem Kheribi;
+        Subtasks: Brust Bizeps;
+    ),
+    (
+        Description: SE hustlen;
+        Date: 19.12.2024;
+        Hours-estimated: 11;
+        Lead: Adem Kheribi;
+        Contributors: Max Haslehner;
+        Subtasks: ;
+    ),
+    (
+        Description: Semester bestehen;
+        Date: 19.12.2024;
+        Hours-estimated: 5;
+        Lead: Max Haslehner;
+        Contributors: Adem Kheribi;
+        Subtasks: T1 schaffen, T2 schaffen;
+    ),
+    (
+        Description: Wrong date item;
+        Date: 32.12.2024;
+        Hours-estimated: 11;
+        Lead: Julia Bernert;
+        Contributors: Mia Kaiser;
+        Subtasks: Soll failen;
+    ),
+    (
+        Description: Gruppenarbeit schreiben;
+        Date: 19.12.2024;
+        Hours-estimated: 11;
+        Lead: Max Haslehner;
+        Contributors: Adem Kheribi;
+        Subtasks: MyTasks bearbeiten, Grammatik definieren;
+    ),
+    (
+        Description: Praesentieren;
+        Date: 19.12.2024;
+        Hours-estimated: 11;
+        Lead: Adem Kheribi;
+        Contributors: Max Haslehner;
+        Subtasks: ;
+    ),
+    (
+        Description: Uebung bewerten;
+        Date: 19.12.2024;
+        Hours-estimated: 11;
+        Lead: Dominik Lamprecht;
+        Contributors: Dominik Lamprecht;
+        Subtasks: ;
+    ),
+    (
+        Description: Ressourcenplanung KW2;
+        Date: 19.12.2024;
+        Hours-estimated: 11;
+        Lead: Max Mustermann;
+        Contributors: Mia Kaiser;
+        Subtasks: ;
+    )
+}

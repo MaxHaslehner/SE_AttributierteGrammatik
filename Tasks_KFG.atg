@@ -1,0 +1,38 @@
+COMPILER Tasks
+
+/*----------------------------------------------------------
+  --- SCANNER
+  ----------------------------------------------------------*/
+
+CHARACTERS
+    digit = "0123456789".
+    letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".
+    special = "_,- ".
+
+TOKENS
+    number = digit {digit}.
+    date = digit digit "." digit digit "." digit digit digit digit.
+    string = letter {letter | digit | special}.
+
+COMMENTS FROM "/*" TO "*/" NESTED
+
+IGNORE '\r' + '\n' + '\t'
+
+/*----------------------------------------------------------
+  --- PARSER
+  ----------------------------------------------------------*/
+
+PRODUCTIONS
+    Tasks =
+        "{" { TaskEntry [","] } "}" (. System.out.println("Taskentries read..."); .) .
+        
+    TaskEntry =
+        "("
+        "Description:" string ";"
+        "Date:" date ";"
+        "Hours-estimated:" number ";"
+        "Lead:" string ";"
+        "Contributors:" string ";"
+        "Subtasks:" [string] ";"
+        ")" .
+END Tasks.

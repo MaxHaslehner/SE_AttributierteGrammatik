@@ -1,0 +1,114 @@
+COMPILER Tasks
+
+/*----------------------------------------------------------
+  --- SCANNER
+  ----------------------------------------------------------*/
+
+CHARACTERS
+    digit = "0123456789".
+    letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".
+    special = "_,- ".
+
+TOKENS
+    number = digit {digit}.
+    date = digit digit "." digit digit "." digit digit digit digit.
+    string = letter {letter | digit | special}.
+
+COMMENTS FROM "/*" TO "*/" NESTED
+
+IGNORE '\r' + '\n' + '\t'
+
+/*----------------------------------------------------------
+  --- PARSER
+  ----------------------------------------------------------*/
+
+PRODUCTIONS
+
+/*----*/
+Tasks =
+    (. 
+        Integer totalHours = 0; 
+        String[] persons = new String[100]; // Array to track persons
+        String[][] tasks = new String[100][100]; // Tasks for each person
+        int personCount = 0;
+    .)
+    "{"
+    { TaskEntry<^totalHours, persons, tasks, personCount> [","] }
+    "}"
+    (. 
+        System.out.println("Gesamte Bearbeitungsdauer: " + totalHours + " Stunden.");
+        System.out.println("Aufgaben nach Personen organisiert:");
+        for (int i = 0; i < personCount; i++) {
+            System.out.print(persons[i] + ": ");
+            for (int j = 0; tasks[i][j] != null; j++) {
+                if (j > 0) System.out.print(", ");
+                System.out.print(tasks[i][j]);
+            }
+            System.out.println();
+        }
+    .)
+    .
+    
+/*----*/
+TaskEntry<^Integer totalHours, String[] persons, String[][] tasks, int personCount> =
+    "("
+    "Description:" string (. String description = t.val; .) ";"
+    "Date:" date (. 
+        String date = t.val; 
+        String[] parts = date.split("\\.");
+        int day = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        if (month < 1 || month > 12 || day < 1 || day > 31) {
+            System.out.println("Ungültiges Datum: " + date);
+        }
+    .) ";"
+    "Hours-estimated:" number (.
+        if (totalHours == null) totalHours = 0;
+        totalHours += Integer.parseInt(t.val); 
+    .) ";"
+    "Lead:" string (. 
+        String lead = t.val; 
+        boolean found = false;
+        for (int i = 0; i < personCount; i++) {
+            if (persons[i].equals(lead)) {
+                for (int j = 0; j < 100; j++) {
+                    if (tasks[i][j] == null) {
+                        tasks[i][j] = description;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if (!found) {
+            persons[personCount] = lead;
+            tasks[personCount][0] = description;
+            personCount++;
+        }
+    .) ";"
+    "Contributors:" string (. 
+        String contributors = t.val; 
+        String[] contributorList = contributors.split(", ");
+        for (String contributor : contributorList) {
+            boolean foundContr = false;
+            for (int i = 0; i < personCount; i++) {
+                if (persons[i].equals(contributor)) {
+                    for (int j = 0; j < 100; j++) {
+                        if (tasks[i][j] == null) {
+                            tasks[i][j] = description;
+                            foundContr = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!foundContr) {
+                persons[personCount] = contributor;
+                tasks[personCount][0] = description;
+                personCount++;
+            }
+        }
+    .) ";"
+    "Subtasks:" [string] ";"
+    ")" .
+END Tasks.
